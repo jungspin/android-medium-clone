@@ -3,6 +3,7 @@
     <color name="green">#41AC45</color>
     <color name="dark_green">#37933B</color>
     <color name="light_gray">#8C8C8C</color>
+    <color name="power_light_gray">#F1F0F0</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
