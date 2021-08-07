@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableLayout;
 
+import com.cos.mediumclone.BookmarkActivity;
 import com.cos.mediumclone.MainActivity;
 import com.cos.mediumclone.R;
 import com.cos.mediumclone.adapter.BookmarkFragAdapter;
@@ -40,17 +42,18 @@ public class FragmentBookmark extends Fragment implements InitSettings {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView: context : " + getContext());
         View view = inflater.inflate(R.layout.fragment_bookmark, container, false);
 
-        vpContainer = (ViewPager2) mContext.findViewById(R.id.vpContainer);
-        tabLayout = mContext.findViewById(R.id.tabLayout);
+        vpContainer = (ViewPager2) view.findViewById(R.id.vpContainer);
+        tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
 
         initAdapter();
         initSetting();
 
         return view;
     }
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -71,10 +74,11 @@ public class FragmentBookmark extends Fragment implements InitSettings {
     public void initAdapter() {
         bookmarkFragAdapter = new BookmarkFragAdapter(mContext);
 
-
         bookmarkFragAdapter.addFragment(new FragmentSaved(mContext));
         bookmarkFragAdapter.addFragment(new FragmentHighlighted(mContext));
         bookmarkFragAdapter.addFragment(new FragmentRecently(mContext));
+
+        vpContainer.setAdapter(bookmarkFragAdapter);
     }
 
     @Override

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,11 @@ public class FragmentSearch extends Fragment implements InitSettings {
         rvKeywords = (RecyclerView) view.findViewById(R.id.rvKeywords);
         rvPosts = (RecyclerView) view.findViewById(R.id.rvPosts);
         rvUsers = (RecyclerView) view.findViewById(R.id.tvUsers);
+
+        Log.d(TAG, "onCreateView: rvKeywords: " +rvKeywords);
+        Log.d(TAG, "onCreateView: rvPosts: " +rvPosts);
+        Log.d(TAG, "onCreateView: rvUsers: " +rvUsers);
+
 
         initAdapter();
         initData();

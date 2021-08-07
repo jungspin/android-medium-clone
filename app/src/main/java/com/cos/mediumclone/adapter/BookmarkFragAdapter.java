@@ -16,9 +16,11 @@ public class BookmarkFragAdapter extends FragmentStateAdapter {
         super(fragmentActivity);
     }
 
+
     public void addFragment(Fragment fragment){
         this.mFragmentList.add(fragment); // onCreate 되기 직전에 이루어져야함
     }
+
 
     @NonNull
     @Override
