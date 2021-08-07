@@ -55,10 +55,10 @@ public class MainActivity extends AppCompatActivity implements InitSettings {
                     selectedFragment = new FragmentHome(mContext);
                     break;
                 case R.id.navSearch:
-                    selectedFragment = new FragmentSearch();
+                    selectedFragment = new FragmentSearch(mContext);
                     break;
                 case R.id.navBookmark:
-                    selectedFragment = new FragmentBookmark();
+                    selectedFragment = new FragmentBookmark(mContext);
                     break;
                 case R.id.navProfile:
                     selectedFragment = new FragmentProfile();

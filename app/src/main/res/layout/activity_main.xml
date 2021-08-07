@@ -21,6 +21,7 @@
         android:layout_height="56dp"
         app:itemBackground="@color/white"
         app:menu="@menu/bottom_menu"
+        android:elevation="50dp"
         app:labelVisibilityMode="unlabeled"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

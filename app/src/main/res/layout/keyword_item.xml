@@ -13,6 +13,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/gray_roundedbutton"
-        android:text="keyword"/>
+        android:text="keyword"
+        android:textAllCaps="false"
+        android:layout_marginBottom="10dp"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
