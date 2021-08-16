@@ -1,25 +1,20 @@
 package com.cos.mediumclone.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
 
-import com.cos.mediumclone.BookmarkActivity;
 import com.cos.mediumclone.MainActivity;
 import com.cos.mediumclone.R;
 import com.cos.mediumclone.adapter.BookmarkFragAdapter;
+import com.cos.mediumclone.adapter.PostAdapter;
 import com.cos.mediumclone.util.InitSettings;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -33,6 +28,7 @@ public class FragmentBookmark extends Fragment implements InitSettings {
     private ViewPager2 vpContainer;
     private TabLayout tabLayout;
     private BookmarkFragAdapter bookmarkFragAdapter;
+    private PostAdapter postAdapter;
 
 
     public FragmentBookmark(MainActivity mContext){
@@ -73,6 +69,7 @@ public class FragmentBookmark extends Fragment implements InitSettings {
     @Override
     public void initAdapter() {
         bookmarkFragAdapter = new BookmarkFragAdapter(mContext);
+        postAdapter = new PostAdapter(mContext);
 
         bookmarkFragAdapter.addFragment(new FragmentSaved(mContext));
         bookmarkFragAdapter.addFragment(new FragmentHighlighted(mContext));

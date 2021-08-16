@@ -30,13 +30,11 @@ public class MainActivity extends AppCompatActivity implements InitSettings {
         setContentView(R.layout.activity_main);
 
 
-        // 초기 화면 셋팅
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, new FragmentHome(mContext), null)
-                .commit();
-
         init();
         initLr();
+        initSetting();
+        initNavigation();
+        initData();
     }
 
 
@@ -48,6 +46,16 @@ public class MainActivity extends AppCompatActivity implements InitSettings {
 
     @Override
     public void initLr() {
+
+    }
+
+    @Override
+    public void initAdapter() {
+
+    }
+
+    @Override
+    public void initNavigation() {
         bottomNavigation.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
 
@@ -63,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements InitSettings {
                     selectedFragment = new FragmentBookmark(mContext);
                     break;
                 case R.id.navProfile:
-                    selectedFragment = new FragmentProfile();
+                    selectedFragment = new FragmentProfile(mContext);
                     break;
             }
             getSupportFragmentManager().beginTransaction()
@@ -74,22 +82,15 @@ public class MainActivity extends AppCompatActivity implements InitSettings {
     }
 
     @Override
-    public void initAdapter() {
-
-    }
-
-    @Override
-    public void initNavigation() {
-
-    }
-
-    @Override
     public void initSetting() {
 
     }
 
     @Override
     public void initData() {
-
+        // 초기 화면 셋팅
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, new FragmentHome(mContext), null)
+                .commit();
     }
 }

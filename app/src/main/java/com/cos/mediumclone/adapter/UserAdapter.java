@@ -21,8 +21,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder>{
     private List<User> users = new ArrayList<>();
 
 
-
-
     // 컬렉션 데이터 셋팅 해야함
     public void addItems(List<User> users){
         this.users = users;
@@ -63,7 +61,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder>{
 
         public void setItem(User user){
             tvUsername.setText(user.getUsername());
-            tvUserInfo.setText(user.getUserInfo());
+            tvUserInfo.setText(user.getEmail());
         }
     }
 }

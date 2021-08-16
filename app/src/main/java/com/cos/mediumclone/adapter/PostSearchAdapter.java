@@ -62,8 +62,8 @@ public class PostSearchAdapter extends RecyclerView.Adapter<PostSearchAdapter.My
         }
 
         public void setItem(Post post){
-            tvWriter.setText(post.getWriter());
-            tvTitle.setText(post.getTitle());
+//            tvWriter.setText(post.getWriter());
+//            tvTitle.setText(post.getTitle());
         }
     }
 }

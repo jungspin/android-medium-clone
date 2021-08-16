@@ -6,24 +6,37 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.cos.mediumclone.MainActivity;
 import com.cos.mediumclone.R;
+import com.cos.mediumclone.adapter.PostAdapter;
 import com.cos.mediumclone.adapter.PostSearchAdapter;
+import com.cos.mediumclone.bean.SessionUser;
+import com.cos.mediumclone.controller.PostController;
+import com.cos.mediumclone.controller.dto.CMRespDTO;
+import com.cos.mediumclone.model.Post;
 import com.cos.mediumclone.provider.PostProvider;
 import com.cos.mediumclone.util.InitSettings;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class FragmentRecently extends Fragment implements InitSettings {
 
     private static final String TAG = "FragmentRecently";
     private MainActivity mContext;
+    private PostController postController;
 
     private RecyclerView rvPosts;
-    private PostSearchAdapter postSearchAdapter;
+    private PostAdapter postAdapter;
 
     public FragmentRecently(MainActivity mContext){
         this.mContext = mContext;
@@ -55,8 +68,8 @@ public class FragmentRecently extends Fragment implements InitSettings {
     @Override
     public void initAdapter() {
         rvPosts.setLayoutManager(new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false));
-        postSearchAdapter = new PostSearchAdapter();
-        rvPosts.setAdapter(postSearchAdapter);
+        postAdapter = new PostAdapter(mContext);
+        rvPosts.setAdapter(postAdapter);
 
     }
 
@@ -68,7 +81,19 @@ public class FragmentRecently extends Fragment implements InitSettings {
     @Override
     public void initData() {
 
-        PostProvider postProvider = new PostProvider();
-        postSearchAdapter.addItems(postProvider.findAll());
+        postController = new PostController();
+        postController.findAll(SessionUser.token).enqueue(new Callback<CMRespDTO<List<Post>>>() {
+            @Override
+            public void onResponse(Call<CMRespDTO<List<Post>>> call, Response<CMRespDTO<List<Post>>> response) {
+                Log.d(TAG, "onResponse: " + response.body());
+                List<Post> posts = response.body().getData();
+                postAdapter.addItems(posts);
+            }
+
+            @Override
+            public void onFailure(Call<CMRespDTO<List<Post>>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 }

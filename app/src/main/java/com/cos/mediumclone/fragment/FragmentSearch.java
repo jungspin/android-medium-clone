@@ -18,23 +18,37 @@ import com.cos.mediumclone.adapter.KeywordAdapter;
 import com.cos.mediumclone.adapter.PostAdapter;
 import com.cos.mediumclone.adapter.PostSearchAdapter;
 import com.cos.mediumclone.adapter.UserAdapter;
+import com.cos.mediumclone.bean.SessionUser;
+import com.cos.mediumclone.controller.PostController;
+import com.cos.mediumclone.controller.UserController;
+import com.cos.mediumclone.controller.dto.CMRespDTO;
+import com.cos.mediumclone.model.Post;
+import com.cos.mediumclone.model.User;
 import com.cos.mediumclone.provider.KeywordProvider;
 import com.cos.mediumclone.provider.PostProvider;
 import com.cos.mediumclone.provider.UserProvider;
 import com.cos.mediumclone.util.InitSettings;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class FragmentSearch extends Fragment implements InitSettings {
 
     private static final String TAG = "FragmentSearch";
-    private Context mContext;
+    private MainActivity mContext;
+    private PostController postController;
+    private UserController userController;
 
     private RecyclerView rvKeywords;
     private RecyclerView.LayoutManager layoutManager;
     private KeywordAdapter keywordAdapter;
 
     private RecyclerView rvPosts;
-    private PostSearchAdapter postSearchAdapter;
+    private PostAdapter postAdapter;
 
     private RecyclerView rvUsers;
     private UserAdapter userAdapter;
@@ -51,10 +65,6 @@ public class FragmentSearch extends Fragment implements InitSettings {
         rvKeywords = (RecyclerView) view.findViewById(R.id.rvKeywords);
         rvPosts = (RecyclerView) view.findViewById(R.id.rvPosts);
         rvUsers = (RecyclerView) view.findViewById(R.id.tvUsers);
-
-        Log.d(TAG, "onCreateView: rvKeywords: " +rvKeywords);
-        Log.d(TAG, "onCreateView: rvPosts: " +rvPosts);
-        Log.d(TAG, "onCreateView: rvUsers: " +rvUsers);
 
 
         initAdapter();
@@ -83,8 +93,8 @@ public class FragmentSearch extends Fragment implements InitSettings {
         rvKeywords.setAdapter(keywordAdapter);
 
         rvPosts.setLayoutManager(new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false));
-        postSearchAdapter = new PostSearchAdapter();
-        rvPosts.setAdapter(postSearchAdapter);
+        postAdapter = new PostAdapter(mContext);
+        rvPosts.setAdapter(postAdapter);
 
         rvUsers.setLayoutManager(new LinearLayoutManager(mContext, RecyclerView.HORIZONTAL, false));
         userAdapter = new UserAdapter();
@@ -96,11 +106,41 @@ public class FragmentSearch extends Fragment implements InitSettings {
 
         KeywordProvider keywordProvider = new KeywordProvider();
         keywordAdapter.addItems(keywordProvider.findAll());
+//
+//        PostProvider postProvider = new PostProvider();
+//        postSearchAdapter.addItems(postProvider.findAll());
+//
+//        UserProvider userProvider = new UserProvider();
+//        userAdapter.addItems(userProvider.findAll());
 
-        PostProvider postProvider = new PostProvider();
-        postSearchAdapter.addItems(postProvider.findAll());
+        postController = new PostController();
+        postController.findAll(SessionUser.token).enqueue(new Callback<CMRespDTO<List<Post>>>() {
+            @Override
+            public void onResponse(Call<CMRespDTO<List<Post>>> call, Response<CMRespDTO<List<Post>>> response) {
+                Log.d(TAG, "onResponse: " + response.body());
+                List<Post> posts = response.body().getData();
+                postAdapter.addItems(posts);
+            }
 
-        UserProvider userProvider = new UserProvider();
-        userAdapter.addItems(userProvider.findAll());
+            @Override
+            public void onFailure(Call<CMRespDTO<List<Post>>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
+        userController = new UserController();
+        userController.findAll().enqueue(new Callback<CMRespDTO<List<User>>>() {
+            @Override
+            public void onResponse(Call<CMRespDTO<List<User>>> call, Response<CMRespDTO<List<User>>> response) {
+                //Log.d(TAG, "onResponse: " + response.body().getData().get(0).getUsername());
+                List<User> users = response.body().getData();
+                userAdapter.addItems(users);
+            }
+
+            @Override
+            public void onFailure(Call<CMRespDTO<List<User>>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 }

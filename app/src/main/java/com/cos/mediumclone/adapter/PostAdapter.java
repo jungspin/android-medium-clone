@@ -1,6 +1,8 @@
 package com.cos.mediumclone.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cos.mediumclone.MainActivity;
+import com.cos.mediumclone.PostDetailActivity;
 import com.cos.mediumclone.R;
+import com.cos.mediumclone.controller.PostController;
 import com.cos.mediumclone.model.Keyword;
 import com.cos.mediumclone.model.Post;
 
@@ -20,8 +26,15 @@ import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder>{
 
+    private static final String TAG = "PostAdapter";
+    private Context mContext;
+    //private PostController postController;
+
     private List<Post> posts = new ArrayList<>();
 
+    public PostAdapter(Context mContext) {
+        this.mContext = mContext;
+    }
 
 
 
@@ -51,7 +64,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder>{
         return posts.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder{
 
         private TextView tvWriter, tvTitle;
         //private ImageView imgUser, imgThumb, icAddBookmark;
@@ -59,14 +72,32 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder>{
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvWriter = itemView.findViewById(R.id.tvWriter);
-            tvTitle = itemView.findViewById(R.id.tvTitle);
+
+            init();
+            initLr();
 
         }
 
         public void setItem(Post post){
-            tvWriter.setText(post.getWriter());
+            tvWriter.setText(post.getUser().getUsername());
             tvTitle.setText(post.getTitle());
+        }
+
+        private void init(){
+            tvWriter = itemView.findViewById(R.id.tvWriter);
+            tvTitle = itemView.findViewById(R.id.tvTitle);
+        }
+
+        private void initLr(){
+            itemView.setOnClickListener(v->{
+                Log.d(TAG, "initLr: 클릭됨 : " + getAdapterPosition());
+
+                // 어댑터 포지션에 위치한 post 데이터를 가져옴
+                Post post = posts.get(getAdapterPosition());
+                Intent intent = new Intent(mContext, PostDetailActivity.class);
+                intent.putExtra("postId", post.getId());
+                mContext.startActivity(intent);
+            });
         }
     }
 }
