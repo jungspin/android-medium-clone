@@ -1,7 +1,7 @@
 # Android Medium clone
 
 * library
-'''gradle
+```gradle
     // lombok
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
@@ -16,4 +16,4 @@
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
     // lottie
     implementation 'com.airbnb.android:lottie:3.7.0'`
-'''
+```
