@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.FragmentBookmark">
+    tools:context=".view.fragment.FragmentBookmark">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

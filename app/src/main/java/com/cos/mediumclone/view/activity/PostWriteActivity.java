@@ -1,4 +1,4 @@
-package com.cos.mediumclone;
+package com.cos.mediumclone.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.cos.mediumclone.R;
 import com.cos.mediumclone.bean.SessionUser;
 import com.cos.mediumclone.controller.PostController;
 import com.cos.mediumclone.controller.dto.CMRespDTO;
@@ -31,6 +32,8 @@ public class PostWriteActivity extends AppCompatActivity implements InitSettings
     private EditText tfTitle, tfWriter, tfContent;
     private Button btnWrite;
     private FloatingActionButton fabFinish;
+
+    //private MyToast myToast = new MyToast();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +69,7 @@ public class PostWriteActivity extends AppCompatActivity implements InitSettings
 
             Post post = Post.builder().title(title).content(content).build();
             postController = new PostController();
-            postController.insert(SessionUser.token, post).enqueue(new Callback<CMRespDTO<Post>>() {
+            postController.insert(post).enqueue(new Callback<CMRespDTO<Post>>() {
                 @Override
                 public void onResponse(Call<CMRespDTO<Post>> call, Response<CMRespDTO<Post>> response) {
                     Log.d(TAG, "onResponse: " + response.body());

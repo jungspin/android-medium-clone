@@ -6,19 +6,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.cos.mediumclone.MainActivity;
-import com.cos.mediumclone.PostDetailActivity;
+import com.cos.mediumclone.view.activity.PostDetailActivity;
 import com.cos.mediumclone.R;
-import com.cos.mediumclone.controller.PostController;
-import com.cos.mediumclone.model.Keyword;
 import com.cos.mediumclone.model.Post;
 
 import java.util.ArrayList;

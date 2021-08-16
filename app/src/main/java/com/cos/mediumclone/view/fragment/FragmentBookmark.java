@@ -1,4 +1,4 @@
-package com.cos.mediumclone.fragment;
+package com.cos.mediumclone.view.fragment;
 
 import android.os.Bundle;
 
@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cos.mediumclone.MainActivity;
+import com.cos.mediumclone.view.activity.MainActivity;
 import com.cos.mediumclone.R;
 import com.cos.mediumclone.adapter.BookmarkFragAdapter;
 import com.cos.mediumclone.adapter.PostAdapter;

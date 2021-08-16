@@ -9,7 +9,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.cos.mediumclone.LoginActivity;
+import com.cos.mediumclone.view.activity.auth.LoginActivity;
 import com.cos.mediumclone.R;
 import com.cos.mediumclone.bean.SessionUser;
 

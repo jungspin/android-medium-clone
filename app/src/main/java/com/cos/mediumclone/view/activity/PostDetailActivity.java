@@ -1,4 +1,4 @@
-package com.cos.mediumclone;
+package com.cos.mediumclone.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,10 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.cos.mediumclone.R;
 import com.cos.mediumclone.bean.SessionUser;
 import com.cos.mediumclone.controller.PostController;
 import com.cos.mediumclone.controller.dto.CMRespDTO;
-import com.cos.mediumclone.helper.CustomAppbarActivity;
 import com.cos.mediumclone.model.Post;
 import com.cos.mediumclone.util.InitSettings;
 import com.cos.mediumclone.util.MyToast;
@@ -33,6 +33,8 @@ public class PostDetailActivity extends AppCompatActivity implements InitSetting
     private TextView tvTitle, tvWriter, tvContent;
     private Button btnUpdate, btnDelete;
     private FloatingActionButton fabFinish;
+
+    private MyToast myToast = new MyToast();
 
     @Override
     public Intent getIntent() {
@@ -84,7 +86,7 @@ public class PostDetailActivity extends AppCompatActivity implements InitSetting
 
         });
         btnDelete.setOnClickListener(v->{
-            postController.deleteById(postId, SessionUser.token).enqueue(new Callback<CMRespDTO>() {
+            postController.deleteById(postId).enqueue(new Callback<CMRespDTO>() {
                 @Override
                 public void onResponse(Call<CMRespDTO> call, Response<CMRespDTO> response) {
                     Log.d(TAG, "onResponse: " + response.body());
@@ -93,7 +95,7 @@ public class PostDetailActivity extends AppCompatActivity implements InitSetting
                         finish();
                         startActivity(intent);
                     } else {
-                        MyToast.toast(mContext, response.body().getMsg());
+                        myToast.toast(mContext, response.body().getMsg());
                     }
                 }
 
@@ -117,7 +119,7 @@ public class PostDetailActivity extends AppCompatActivity implements InitSetting
     public void initData() {
         postController = new PostController();
         int postId = getIntent().getIntExtra("postId", 0);
-        postController.findById(postId, SessionUser.token).enqueue(new Callback<CMRespDTO<Post>>() {
+        postController.findById(postId).enqueue(new Callback<CMRespDTO<Post>>() {
             @Override
             public void onResponse(Call<CMRespDTO<Post>> call, Response<CMRespDTO<Post>> response) {
                 if (response.body().getCode() == 1){

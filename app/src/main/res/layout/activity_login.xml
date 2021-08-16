@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".view.activity.auth.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView3"
@@ -79,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Join"
+        android:text="Login"
         android:textAllCaps="false"
         android:background="@drawable/follow_roundedbutton"
         android:layout_gravity="center"

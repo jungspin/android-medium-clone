@@ -1,17 +1,16 @@
-package com.cos.mediumclone;
+package com.cos.mediumclone.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
-import com.cos.mediumclone.fragment.FragmentBookmark;
-import com.cos.mediumclone.fragment.FragmentHome;
-import com.cos.mediumclone.fragment.FragmentProfile;
-import com.cos.mediumclone.fragment.FragmentSearch;
+import com.cos.mediumclone.R;
+import com.cos.mediumclone.view.fragment.FragmentBookmark;
+import com.cos.mediumclone.view.fragment.FragmentHome;
+import com.cos.mediumclone.view.fragment.FragmentProfile;
+import com.cos.mediumclone.view.fragment.FragmentSearch;
 import com.cos.mediumclone.util.InitSettings;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

@@ -25,8 +25,6 @@ public interface UserService {
     @GET("/init/user")
     Call<CMRespDTO<List<User>>> initUser();
 
-    @GET("/user/{id}")
-    Call<CMRespDTO> findById(@Header("Authorization")String authorization);
 
 
     Retrofit retrofit = new Retrofit.Builder()

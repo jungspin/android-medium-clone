@@ -9,7 +9,6 @@
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
     // retrofit2
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    // retrofit2:converter
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     // OkHttp
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'

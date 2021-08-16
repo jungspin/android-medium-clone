@@ -1,4 +1,4 @@
-package com.cos.mediumclone;
+package com.cos.mediumclone.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.cos.mediumclone.R;
 
 public class LoadingActivity extends AppCompatActivity {
 
@@ -24,6 +26,6 @@ public class LoadingActivity extends AppCompatActivity {
         h.postDelayed(() -> {
             Intent intent = new Intent(mContext, MainActivity.class);
             mContext.startActivity(intent);
-        }, 2000);
+        }, 4000);
     }
 }

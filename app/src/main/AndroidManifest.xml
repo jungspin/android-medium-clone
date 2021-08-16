@@ -12,13 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MediumClone"
         android:usesCleartextTraffic="true">
-        <activity android:name=".LoadingActivity"></activity>
-        <activity android:name=".PostWriteActivity" />
-        <activity android:name=".PostUpdateActivity" />
-        <activity android:name=".PostDetailActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".JoinActivity">
+        <activity android:name=".view.activity.LoadingActivity"></activity>
+        <activity android:name=".view.activity.PostWriteActivity" />
+        <activity android:name=".view.activity.PostUpdateActivity" />
+        <activity android:name=".view.activity.PostDetailActivity" />
+        <activity android:name=".view.activity.auth.LoginActivity" />
+        <activity android:name=".view.activity.MainActivity" />
+        <activity android:name=".view.activity.auth.JoinActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

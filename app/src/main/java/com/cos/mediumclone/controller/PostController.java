@@ -12,23 +12,23 @@ public class PostController {
 
     private PostService postService = PostService.service;
 
-    public Call<CMRespDTO<List<Post>>> findAll(String authorization){
-        return postService.findAll(authorization);
+    public Call<CMRespDTO<List<Post>>> findAll(){
+        return postService.findAll();
     }
 
-    public Call<CMRespDTO<Post>> findById(int id, String authorization){
-        return postService.findById(id, authorization);
+    public Call<CMRespDTO<Post>> findById(int id){
+        return postService.findById(id);
     }
 
-    public Call<CMRespDTO<Post>> updateById(int id, String authorization, Post post){
-        return postService.updateById(id, authorization, post);
+    public Call<CMRespDTO<Post>> updateById(int id, Post post){
+        return postService.updateById(id, post);
     }
 
-    public Call<CMRespDTO> deleteById(int id, String authorization){
-        return postService.deleteById(id, authorization);
+    public Call<CMRespDTO> deleteById(int id){
+        return postService.deleteById(id);
     }
 
-    public Call<CMRespDTO<Post>> insert(String authorization, Post post){
-        return postService.insert(authorization, post);
+    public Call<CMRespDTO<Post>> insert(Post post){
+        return postService.insert(post);
     }
 }

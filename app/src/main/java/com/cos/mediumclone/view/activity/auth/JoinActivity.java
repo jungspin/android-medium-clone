@@ -1,24 +1,21 @@
-package com.cos.mediumclone;
+package com.cos.mediumclone.view.activity.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.cos.mediumclone.R;
 import com.cos.mediumclone.controller.UserController;
 import com.cos.mediumclone.controller.dto.CMRespDTO;
 import com.cos.mediumclone.model.User;
 import com.cos.mediumclone.util.InitSettings;
 import com.cos.mediumclone.util.MyToast;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,6 +31,7 @@ public class JoinActivity extends AppCompatActivity implements InitSettings {
     private EditText tfUsername, tfPassword, tfEmail;
     private Button btnJoin;
     private TextView tvLinkLogin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +61,17 @@ public class JoinActivity extends AppCompatActivity implements InitSettings {
             startActivity(intent);
         });
 
+
         btnJoin.setOnClickListener(v-> {
             String username = tfUsername.getText().toString().trim();
             String password = tfPassword.getText().toString().trim();
             String email = tfEmail.getText().toString().trim();
+
+            // 공백있을 시 가입 불가
+            if (username.equals("") || password.equals("") || email.equals("")){
+                MyToast.toast(mContext, "모든 칸을 채워주세요");
+                return;
+            }
 
             User user = User.builder()
                     .username(username).password(password).email(email).build();
