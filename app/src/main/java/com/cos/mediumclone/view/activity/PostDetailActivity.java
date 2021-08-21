@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.cos.mediumclone.R;
-import com.cos.mediumclone.bean.SessionUser;
+import com.cos.mediumclone.config.SessionUser;
 import com.cos.mediumclone.controller.PostController;
 import com.cos.mediumclone.controller.dto.CMRespDTO;
 import com.cos.mediumclone.model.Post;
@@ -75,7 +75,7 @@ public class PostDetailActivity extends AppCompatActivity implements InitSetting
 
         fabFinish.setOnClickListener(v->{
             Intent intent = new Intent(mContext, MainActivity.class); // 서버에 재요청해서 데이터 받음
-            finish();
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
         });
         btnUpdate.setOnClickListener(v->{
@@ -91,8 +91,10 @@ public class PostDetailActivity extends AppCompatActivity implements InitSetting
                 public void onResponse(Call<CMRespDTO> call, Response<CMRespDTO> response) {
                     Log.d(TAG, "onResponse: " + response.body());
                     if (response.body().getCode() == 1){
+                        // 이전 페이지 다 삭제하고 리스트만 남게해서!!
+                        // finish 하면 뒤로 갈때 마다 다운로드 다시 받게 되니까 -> ux를 생각해보면 된다
                         Intent intent = new Intent(mContext, MainActivity.class);
-                        finish();
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     } else {
                         myToast.toast(mContext, response.body().getMsg());

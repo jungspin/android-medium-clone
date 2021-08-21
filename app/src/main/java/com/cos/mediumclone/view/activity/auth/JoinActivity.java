@@ -35,13 +35,34 @@ public class JoinActivity extends AppCompatActivity implements InitSettings {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
+
+        Log.d(TAG, "onCreate: ");
 
         init();
         initLr();
         //initSetting();
         //initData();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.d(TAG, "onResume: ");
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        Log.d(TAG, "onPause: ");
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.d(TAG, "onDestroy: ");
+        super.onDestroy();
     }
 
     @Override
@@ -58,6 +79,7 @@ public class JoinActivity extends AppCompatActivity implements InitSettings {
     public void initLr() {
         tvLinkLogin.setOnClickListener(v->{
             Intent intent = new Intent(mContext, LoginActivity.class);
+            finish();
             startActivity(intent);
         });
 
@@ -87,8 +109,8 @@ public class JoinActivity extends AppCompatActivity implements InitSettings {
                         //User joinUser = response.body().getData();
                         //Log.d(TAG, "onResponse: " + joinUser.getUsername());
                         Intent intent = new Intent(mContext, LoginActivity.class);
-                        finish(); // 뒤로 못가게
                         startActivity(intent);
+                        finish();
                     }
 
                 }

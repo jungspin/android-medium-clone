@@ -11,7 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.cos.mediumclone.view.activity.auth.LoginActivity;
 import com.cos.mediumclone.R;
-import com.cos.mediumclone.bean.SessionUser;
+import com.cos.mediumclone.config.SessionUser;
 
 public class CustomAppbarActivity extends AppCompatActivity {
 

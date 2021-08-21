@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.cos.mediumclone.view.activity.MainActivity;
 import com.cos.mediumclone.view.activity.PostWriteActivity;
 import com.cos.mediumclone.R;
-import com.cos.mediumclone.bean.SessionUser;
+import com.cos.mediumclone.config.SessionUser;
 import com.cos.mediumclone.util.InitSettings;
 import com.cos.mediumclone.view.activity.auth.LoginActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

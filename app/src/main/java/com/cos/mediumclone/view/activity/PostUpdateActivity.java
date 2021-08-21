@@ -10,9 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.cos.mediumclone.R;
-import com.cos.mediumclone.bean.SessionUser;
 import com.cos.mediumclone.controller.PostController;
 import com.cos.mediumclone.controller.dto.CMRespDTO;
+import com.cos.mediumclone.controller.dto.PostUpdateDTO;
 import com.cos.mediumclone.model.Post;
 import com.cos.mediumclone.util.InitSettings;
 import com.cos.mediumclone.util.MyToast;
@@ -34,6 +34,7 @@ public class PostUpdateActivity extends AppCompatActivity implements InitSetting
     private FloatingActionButton fabFinish;
 
 
+    // postId 전역으로 관리하기!!!
     @Override
     public Intent getIntent() {
         return super.getIntent();
@@ -69,19 +70,21 @@ public class PostUpdateActivity extends AppCompatActivity implements InitSetting
 
             String title = tfTitle.getText().toString();
             String content = tfContent.getText().toString();
-            Post post = Post.builder().title(title).content(content).build();
+            //Post post = Post.builder().title(title).content(content).build();
+            PostUpdateDTO postUpdateDTO = new PostUpdateDTO(title, content);
 
-            postController.updateById(postId, post).enqueue(new Callback<CMRespDTO<Post>>() {
+            postController.updateById(postId, postUpdateDTO).enqueue(new Callback<CMRespDTO<Post>>() {
                 @Override
                 public void onResponse(Call<CMRespDTO<Post>> call, Response<CMRespDTO<Post>> response) {
                     Log.d(TAG, "onResponse: " +response.body());
                     Post updatedPost = response.body().getData();
                     if (response.body().getCode() == 1){
-
-                        Intent intent = new Intent(mContext, PostDetailActivity.class);
-                        intent.putExtra("postId", updatedPost.getId());
+                        // intent 하면 포스트 아이디를 가져가야함
+                        //Intent intent = new Intent(mContext, PostDetailActivity.class);
+                        //intent.putExtra("postId", updatedPost.getId());
+                        // finish 하면 디테일의 resume 에서 데이터 다운 받아야됨
                         finish();
-                        startActivity(intent);
+                        //startActivity(intent);
                     } else {
                         MyToast.toast(mContext, response.body().getMsg());
                     }

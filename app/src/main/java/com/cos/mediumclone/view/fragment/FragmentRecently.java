@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import com.cos.mediumclone.view.activity.MainActivity;
 import com.cos.mediumclone.R;
 import com.cos.mediumclone.adapter.PostAdapter;
-import com.cos.mediumclone.bean.SessionUser;
 import com.cos.mediumclone.controller.PostController;
 import com.cos.mediumclone.controller.dto.CMRespDTO;
 import com.cos.mediumclone.model.Post;

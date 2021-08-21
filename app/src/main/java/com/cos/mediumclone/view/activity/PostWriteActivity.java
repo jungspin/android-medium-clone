@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.cos.mediumclone.R;
-import com.cos.mediumclone.bean.SessionUser;
+import com.cos.mediumclone.config.SessionUser;
 import com.cos.mediumclone.controller.PostController;
 import com.cos.mediumclone.controller.dto.CMRespDTO;
 import com.cos.mediumclone.model.Post;
@@ -79,7 +79,9 @@ public class PostWriteActivity extends AppCompatActivity implements InitSettings
 
                     Intent intent = new Intent(mContext, PostDetailActivity.class);
                     intent.putExtra("postId", writtenPost.getId());
-                    finish();
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    //finish();
                     startActivity(intent);
                 }
 

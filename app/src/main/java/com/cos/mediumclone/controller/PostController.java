@@ -1,6 +1,7 @@
 package com.cos.mediumclone.controller;
 
 import com.cos.mediumclone.controller.dto.CMRespDTO;
+import com.cos.mediumclone.controller.dto.PostUpdateDTO;
 import com.cos.mediumclone.model.Post;
 import com.cos.mediumclone.service.PostService;
 
@@ -20,8 +21,8 @@ public class PostController {
         return postService.findById(id);
     }
 
-    public Call<CMRespDTO<Post>> updateById(int id, Post post){
-        return postService.updateById(id, post);
+    public Call<CMRespDTO<Post>> updateById(int id, PostUpdateDTO postUpdateDTO){
+        return postService.updateById(id, postUpdateDTO);
     }
 
     public Call<CMRespDTO> deleteById(int id){

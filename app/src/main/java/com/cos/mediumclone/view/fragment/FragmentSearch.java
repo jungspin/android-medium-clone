@@ -16,7 +16,6 @@ import com.cos.mediumclone.R;
 import com.cos.mediumclone.adapter.KeywordAdapter;
 import com.cos.mediumclone.adapter.PostAdapter;
 import com.cos.mediumclone.adapter.UserAdapter;
-import com.cos.mediumclone.bean.SessionUser;
 import com.cos.mediumclone.controller.PostController;
 import com.cos.mediumclone.controller.UserController;
 import com.cos.mediumclone.controller.dto.CMRespDTO;
