@@ -1,5 +1,6 @@
 package com.cos.mediumclone.view.activity.auth;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -16,6 +17,13 @@ import com.cos.mediumclone.controller.dto.CMRespDTO;
 import com.cos.mediumclone.model.User;
 import com.cos.mediumclone.util.InitSettings;
 import com.cos.mediumclone.util.MyToast;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +41,9 @@ public class JoinActivity extends AppCompatActivity implements InitSettings {
     private TextView tvLinkLogin;
 
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         
@@ -43,9 +54,25 @@ public class JoinActivity extends AppCompatActivity implements InitSettings {
 
         init();
         initLr();
+        //insertDb();
         //initSetting();
         //initData();
     }
+
+//    private void insertDb() {
+//        Log.d(TAG, "insertDb: 실행됨");
+//        FirebaseFirestore db = FirebaseFirestore.getInstance();
+//
+//        Map<String, Object> user = new HashMap<>();
+//        user.put("first", "Ada");
+//        user.put("last", "Lovelace");
+//        user.put("born", "1815");
+//
+//        db.collection("users")
+//                .add(user)
+//                .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
+//                .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+//    }
 
     @Override
     protected void onResume() {

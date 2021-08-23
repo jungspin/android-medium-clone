@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.cos.mediumclone.R;
+import com.cos.mediumclone.TestActivity;
 import com.cos.mediumclone.config.SessionUser;
 import com.cos.mediumclone.controller.UserController;
 import com.cos.mediumclone.controller.dto.CMRespDTO;
@@ -28,6 +29,7 @@ import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
 import java.util.List;
@@ -47,6 +49,10 @@ public class LoginActivity extends AppCompatActivity implements InitSettings {
     private Button btnLogin, btnLinkGoogle;
     private TextView tvLinkJoin;
 
+    private TestActivity testActivity = new TestActivity();
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +62,8 @@ public class LoginActivity extends AppCompatActivity implements InitSettings {
 
         init();
         initLr();
+
+
     }
 
     @Override
