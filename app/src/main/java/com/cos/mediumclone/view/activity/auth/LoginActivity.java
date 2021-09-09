@@ -1,6 +1,5 @@
 package com.cos.mediumclone.view.activity.auth;
 
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.cos.mediumclone.R;
-import com.cos.mediumclone.TestActivity;
 import com.cos.mediumclone.config.SessionUser;
 import com.cos.mediumclone.controller.UserController;
 import com.cos.mediumclone.controller.dto.CMRespDTO;
@@ -29,7 +27,6 @@ import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
 import java.util.List;
@@ -46,12 +43,9 @@ public class LoginActivity extends AppCompatActivity implements InitSettings {
     private UserController userController;
 
     private EditText tfUsername, tfPassword;
-    private Button btnLogin, btnLinkGoogle;
+    private Button btnLogin/*, btnLinkGoogle*/;
     private TextView tvLinkJoin;
 
-    private TestActivity testActivity = new TestActivity();
-
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +56,11 @@ public class LoginActivity extends AppCompatActivity implements InitSettings {
 
         init();
         initLr();
+        //getDataFromDb();
 
 
     }
+
 
     @Override
     public void init() {
@@ -72,15 +68,15 @@ public class LoginActivity extends AppCompatActivity implements InitSettings {
         tfUsername = findViewById(R.id.tfUsername);
         tfPassword = findViewById(R.id.tfPassword);
         btnLogin = findViewById(R.id.btnLogin);
-        btnLinkGoogle = findViewById(R.id.btnLinkGoogle);
+        //btnLinkGoogle = findViewById(R.id.btnLinkGoogle);
     }
 
     @Override
     public void initLr() {
         // 구글 로그인 화면으로 가기
-        btnLinkGoogle.setOnClickListener(v->{
-            signIn();
-        });
+//        btnLinkGoogle.setOnClickListener(v->{
+//            signIn();
+//        });
         // 일반 로그인
         tvLinkJoin.setOnClickListener(v->{
             Intent intent = new Intent(mContext, JoinActivity.class);
@@ -132,11 +128,8 @@ public class LoginActivity extends AppCompatActivity implements InitSettings {
     //============ 구글 로그인을 위한 로직 ==============
     private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
             new FirebaseAuthUIActivityResultContract(),
-            new ActivityResultCallback<FirebaseAuthUIAuthenticationResult>() {
-                @Override
-                public void onActivityResult(FirebaseAuthUIAuthenticationResult result) {
-                    onSignInResult(result); // 로그인 완료 되면 뭐할건지에 대한 함수를 정의해라
-                }
+            result -> {
+                onSignInResult(result); // 로그인 완료 되면 뭐할건지에 대한 함수를 정의해라
             }
     );
 

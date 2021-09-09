@@ -59,20 +59,20 @@ public class JoinActivity extends AppCompatActivity implements InitSettings {
         //initData();
     }
 
-//    private void insertDb() {
-//        Log.d(TAG, "insertDb: 실행됨");
-//        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//
-//        Map<String, Object> user = new HashMap<>();
-//        user.put("first", "Ada");
-//        user.put("last", "Lovelace");
-//        user.put("born", "1815");
-//
-//        db.collection("users")
-//                .add(user)
-//                .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
-//                .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
-//    }
+    private void insertDb() {
+        Log.d(TAG, "insertDb: 실행됨");
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        Map<String, Object> user = new HashMap<>();
+        user.put("first", "Ada");
+        user.put("last", "Lovelace");
+        user.put("born", "1815");
+
+        db.collection("users")
+                .add(user)
+                .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
+                .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
+    }
 
     @Override
     protected void onResume() {

@@ -38,6 +38,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder>{
         notifyDataSetChanged();
     }
 
+    // 컬렉션 데이터 셋팅 해야함
+    public void addItem(Post post){
+        this.posts.add(post);
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
