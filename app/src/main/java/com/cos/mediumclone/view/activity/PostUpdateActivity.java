@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import com.cos.mediumclone.util.InitSettings;
 import com.cos.mediumclone.util.MyToast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import jp.wasabeef.richeditor.RichEditor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,9 +31,10 @@ public class PostUpdateActivity extends AppCompatActivity implements InitSetting
 
     private PostController postController = new PostController();
 
-    private EditText tfTitle, tfWriter, tfContent;
-    private Button btnUpdate;
-    private FloatingActionButton fabFinish;
+
+    private EditText etTitle;
+    private RichEditor mEditor;
+    private FloatingActionButton fabFinish, fabUpdate;
 
 
     // postId 전역으로 관리하기!!!
@@ -53,10 +56,9 @@ public class PostUpdateActivity extends AppCompatActivity implements InitSetting
 
     @Override
     public void init() {
-        tfTitle = findViewById(R.id.tfTitle);
-        tfWriter = findViewById(R.id.tfWriter);
-        tfContent = findViewById(R.id.tfContent);
-        btnUpdate = findViewById(R.id.btnUpdate);
+        etTitle = findViewById(R.id.etTitle);
+        mEditor = findViewById(R.id.mEditor);
+        fabUpdate = findViewById(R.id.fabUpdate);
         fabFinish = findViewById(R.id.fabFinish);
     }
 
@@ -65,12 +67,12 @@ public class PostUpdateActivity extends AppCompatActivity implements InitSetting
         fabFinish.setOnClickListener(v->{
             finish();
         });
-        btnUpdate.setOnClickListener(v->{
+        fabUpdate.setOnClickListener(v->{
             int postId = getIntent().getIntExtra("postId", 0);
 
-            String title = tfTitle.getText().toString();
-            String content = tfContent.getText().toString();
-            //Post post = Post.builder().title(title).content(content).build();
+            String title = etTitle.getText().toString();
+            String content = mEditor.getHtml();
+            Post post = Post.builder().title(title).content(content).build();
             PostUpdateDTO postUpdateDTO = new PostUpdateDTO(title, content);
 
             postController.updateById(postId, postUpdateDTO).enqueue(new Callback<CMRespDTO<Post>>() {
@@ -100,6 +102,18 @@ public class PostUpdateActivity extends AppCompatActivity implements InitSetting
 
     @Override
     public void initSetting() {
+        // 에디터 설정
+        mEditor.setEditorHeight(200);
+        mEditor.setEditorFontSize(22);
+        mEditor.setPadding(10, 10, 10, 10);
+        mEditor.setPlaceholder("Insert text here...");
+
+        findViewById(R.id.actionHeading1).setOnClickListener(v -> {
+            mEditor.setHeading(1);
+        });
+        findViewById(R.id.actionBlockquote).setOnClickListener(v -> {
+            mEditor.setBlockquote();
+        });
 
     }
 
@@ -112,9 +126,8 @@ public class PostUpdateActivity extends AppCompatActivity implements InitSetting
                 if (response.body().getCode() == 1){
                     Post post = response.body().getData();
                     //Log.d(TAG, "onResponse: " + post.getTitle());
-                    tfTitle.setText(post.getTitle());
-                    tfWriter.setText(post.getUser().getUsername());
-                    tfContent.setText(post.getContent());
+                    etTitle.setText(post.getTitle());
+                    mEditor.setHtml(post.getContent());
                 }
             }
 

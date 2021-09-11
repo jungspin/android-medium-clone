@@ -1,11 +1,15 @@
 package com.cos.mediumclone.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -18,6 +22,7 @@ import com.cos.mediumclone.util.InitSettings;
 import com.cos.mediumclone.util.MyToast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import jp.wasabeef.richeditor.RichEditor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,9 +34,9 @@ public class PostWriteActivity extends AppCompatActivity implements InitSettings
 
     private PostController postController;
 
-    private EditText tfTitle, tfWriter, tfContent;
-    private Button btnWrite;
-    private FloatingActionButton fabFinish;
+    private EditText etTitle;
+    private RichEditor mEditor;
+    private FloatingActionButton fabFinish, fabSave;
 
     //private MyToast myToast = new MyToast();
 
@@ -42,30 +47,36 @@ public class PostWriteActivity extends AppCompatActivity implements InitSettings
 
         init();
         initLr();
+        initSetting();
         initData();
 
     }
 
     @Override
     public void init() {
-        tfTitle = findViewById(R.id.tfTitle);
-        tfWriter = findViewById(R.id.tfWriter);
-        tfContent = findViewById(R.id.tfContent);
-        btnWrite = findViewById(R.id.btnWrite);
+        etTitle = findViewById(R.id.etTitle);
+        mEditor = findViewById(R.id.mEditor);
+        fabSave = findViewById(R.id.fabSave);
         fabFinish = findViewById(R.id.fabFinish);
     }
 
     @Override
     public void initLr() {
+
         fabFinish.setOnClickListener(v->{
             Intent intent = new Intent(mContext, MainActivity.class);
             finish();
             startActivity(intent);
         });
 
-        btnWrite.setOnClickListener(v->{
-            String title = tfTitle.getText().toString();
-            String content = tfContent.getText().toString();
+        fabSave.setOnClickListener(v->{
+            String title = etTitle.getText().toString();
+            String content = mEditor.getHtml();
+            Spanned content2 = Html.fromHtml(content);
+
+            Log.d(TAG, "initLr: fabSave : " + title);
+            Log.d(TAG, "initLr: fabSave : " + content);
+            Log.d(TAG, "initLr: fabSave : " + content2);
 
             Post post = Post.builder().title(title).content(content).build();
             postController = new PostController();
@@ -97,7 +108,28 @@ public class PostWriteActivity extends AppCompatActivity implements InitSettings
     }
 
     @Override
+    public void initSetting() {
+        Toolbar myToolbar = findViewById(R.id.postWriteToolbar);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setTitle("");
+
+        // 에디터 설정
+        mEditor.setEditorHeight(200);
+        mEditor.setEditorFontSize(22);
+        mEditor.setPadding(10, 10, 10, 10);
+        mEditor.setPlaceholder("Insert text here...");
+
+        findViewById(R.id.actionHeading1).setOnClickListener(v -> {
+            mEditor.setHeading(1);
+        });
+        findViewById(R.id.actionBlockquote).setOnClickListener(v -> {
+            mEditor.setBlockquote();
+        });
+
+    }
+
+    @Override
     public void initData() {
-        tfWriter.setText(SessionUser.user.getUsername());
+
     }
 }

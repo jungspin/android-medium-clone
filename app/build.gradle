@@ -69,4 +69,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-database'
     // rxjava
     implementation "io.reactivex.rxjava3:rxjava:3.1.0"
+    // richeditor
+    implementation 'jp.wasabeef:richeditor-android:2.0.0'
 }

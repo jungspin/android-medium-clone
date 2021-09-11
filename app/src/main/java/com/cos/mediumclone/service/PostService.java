@@ -41,7 +41,7 @@ public interface PostService {
 
 
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://172.30.1.25:8080")
+            .baseUrl("http://172.30.1.43:8080")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build();
