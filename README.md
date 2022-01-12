@@ -1,5 +1,13 @@
 # Android Medium clone
 
+### 완성 화면
+[링크](https://www.notion.so/jungspin/Medium-clone-baa6e5fcc46c4816a297796bcc6c855c)
+
+### 개발 언어
+* java
+
+### jwt 서버 연동 + retrofit + MVP 패턴
+
 * library
 ```gradle
         // lombok : 개발시에만 필요한것

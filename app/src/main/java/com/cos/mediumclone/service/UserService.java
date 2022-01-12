@@ -38,8 +38,12 @@ public interface UserService {
             addInterceptor(new HeaderInterceptor()).build();
 
     Retrofit retrofit = new Retrofit.Builder()
+<<<<<<< HEAD
             .baseUrl(BuildConfig.BASE_URL)
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+=======
+            .baseUrl("http://172.30.1.43:8080")
+>>>>>>> b04c0a5e031b0b7676e05a40afe65ffcc2103001
             .addConverterFactory(GsonConverterFactory.create())
             //.client(client)
             .build();

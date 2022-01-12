@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -131,7 +132,7 @@ public class PostDetailActivity extends AppCompatActivity implements InitSetting
                     //Log.d(TAG, "onResponse: " + post.getTitle());
                     tvTitle.setText(post.getTitle());
                     tvWriter.setText(post.getUser().getUsername());
-                    tvContent.setText(post.getContent());
+                    tvContent.setText(Html.fromHtml(post.getContent()));
 
                     if (!SessionUser.user.getUsername().equals(post.getUser().getUsername())){
                         btnUpdate.setVisibility(View.INVISIBLE);
