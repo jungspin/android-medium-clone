@@ -54,7 +54,7 @@
                     android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="title"
+                    android:text="샘플데이터 입니다"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     />
                 <TextView
@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="writer"
+                    android:text="홍길동"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary"
                     />
@@ -71,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="content"
+                    android:text="샘플 내용 입니다"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary"
                     />
@@ -103,5 +103,7 @@
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>

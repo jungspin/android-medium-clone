@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TestActivity">
+
+    <ToggleButton
+        android:id="@+id/btnAddOneMonth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/date_picker_background"
+        android:textOff="1개월"
+        android:textOn="1개월"
+        app:layout_constraintEnd_toStartOf="@+id/btnAddThreeMonth"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/btnAddThreeMonth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/date_picker_background"
+        android:textOff="3개월"
+        android:textOn="3개월"
+        app:layout_constraintEnd_toStartOf="@+id/btnAddSixMonth"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnAddOneMonth"
+        app:layout_constraintTop_toTopOf="@+id/btnAddOneMonth" />
+
+    <ToggleButton
+        android:id="@+id/btnAddSixMonth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/date_picker_background"
+        android:textOff="6개월"
+        android:textOn="6개월"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnAddThreeMonth"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnStartDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/date_picker_background"
+        android:drawableEnd="@drawable/ic_calendar"
+        android:paddingEnd="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/dash"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="4.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddOneMonth" />
+
+
+    <TextView
+        android:id="@+id/dash"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="-"
+        app:layout_constraintBottom_toBottomOf="@+id/btnStartDate"
+        app:layout_constraintEnd_toStartOf="@+id/btnEndDate"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/btnStartDate"
+        app:layout_constraintTop_toTopOf="@+id/btnStartDate" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnEndDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/date_picker_background"
+        android:drawableEnd="@drawable/ic_calendar"
+        android:paddingEnd="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="4.5"
+        app:layout_constraintStart_toEndOf="@+id/dash"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddThreeMonth" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnClear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/date_picker_background"
+        android:text="초기화"
+        app:layout_constraintEnd_toStartOf="@+id/btnSubmit"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnStartDate" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSubmit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/date_picker_background"
+        android:text="적용"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btnClear"
+        app:layout_constraintTop_toTopOf="@+id/btnClear" />
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

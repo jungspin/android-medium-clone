@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.cos.mediumclone.R;
+import com.cos.mediumclone.config.LoadingFragment;
 import com.cos.mediumclone.config.SessionUser;
 import com.cos.mediumclone.controller.PostController;
 import com.cos.mediumclone.controller.dto.CMRespDTO;
@@ -119,6 +120,7 @@ public class PostDetailActivity extends AppCompatActivity implements InitSetting
 
     @Override
     public void initData() {
+
         postController = new PostController();
         int postId = getIntent().getIntExtra("postId", 0);
         postController.findById(postId).enqueue(new Callback<CMRespDTO<Post>>() {

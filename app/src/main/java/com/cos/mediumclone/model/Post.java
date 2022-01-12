@@ -19,4 +19,15 @@ public class Post {
     private User user;
     private String created;
     private String updated;
+
+    @Override
+    public String toString() {
+        return
+                "id : " + id + '\n' +
+                "title : " + title + '\n' +
+                "content : " + content + '\n' +
+                "user : " + user + '\n' +
+                "created : " + created + '\n' +
+                "updated : " + updated + '\n';
+    }
 }

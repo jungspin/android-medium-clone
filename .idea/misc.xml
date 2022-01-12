@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/drawable/date_picker_background.xml" value="0.38229166666666664" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/drawable/detail_background.xml" value="0.36666666666666664" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/drawable/dialog_background.xml" value="0.38229166666666664" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/drawable/dialog_left_button.xml" value="0.38229166666666664" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/drawable/dialog_right_button.xml" value="0.38229166666666664" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/drawable/follow_roundedbutton.xml" value="0.38229166666666664" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/drawable/gray_roundedbutton.xml" value="0.38229166666666664" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/drawable/item_dialog.xml" value="0.38229166666666664" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/drawable/refresh_roundedbutton.xml" value="0.38229166666666664" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/drawable/searchview_rounded.xml" value="0.38229166666666664" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/drawable/skeleton_ui.xml" value="0.38229166666666664" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/layout/activity_loading.xml" value="0.3296875" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/layout/activity_login.xml" value="0.36614583333333334" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/layout/activity_post_detail.xml" value="0.36614583333333334" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/layout/activity_test.xml" value="0.3515625" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/layout/activity_test_detail.xml" value="0.2828125" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/layout/fragment_first.xml" value="0.35052083333333334" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/layout/fragment_home.xml" value="0.5" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/layout/fragment_loading.xml" value="0.36614583333333334" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/layout/fragment_second.xml" value="0.35052083333333334" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/layout/item_custom_dialog.xml" value="0.36614583333333334" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/layout/item_custom_dialog_single.xml" value="0.36614583333333334" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/layout/item_custom_dialog_two.xml" value="0.36614583333333334" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/layout/keyword_item.xml" value="0.36614583333333334" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/layout/post_item.xml" value="0.36614583333333334" />
+        <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/layout/post_item_shimmer.xml" value="0.36614583333333334" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

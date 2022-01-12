@@ -1,30 +1,53 @@
 package com.cos.mediumclone.view.activity.auth;
 
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cos.mediumclone.R;
+import com.cos.mediumclone.config.LoadingFragment;
 import com.cos.mediumclone.config.SessionUser;
 import com.cos.mediumclone.controller.UserController;
 import com.cos.mediumclone.controller.dto.CMRespDTO;
 import com.cos.mediumclone.controller.dto.LoginDTO;
+import com.cos.mediumclone.databinding.ActivityLoginBinding;
+import com.cos.mediumclone.model.Post;
 import com.cos.mediumclone.model.User;
+import com.cos.mediumclone.util.CustomDialog;
 import com.cos.mediumclone.util.InitSettings;
 import com.cos.mediumclone.util.MyToast;
-import com.cos.mediumclone.view.activity.LoadingActivity;
 import com.cos.mediumclone.view.activity.MainActivity;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
+import com.github.javiersantos.appupdater.AppUpdater;
+import com.github.javiersantos.appupdater.AppUpdaterUtils;
+import com.github.javiersantos.appupdater.enums.AppUpdaterError;
+import com.github.javiersantos.appupdater.enums.UpdateFrom;
+import com.github.javiersantos.appupdater.objects.Update;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -45,20 +68,87 @@ public class LoginActivity extends AppCompatActivity implements InitSettings {
     private EditText tfUsername, tfPassword;
     private Button btnLogin/*, btnLinkGoogle*/;
     private TextView tvLinkJoin;
+    ProgressBar progressBar;
+
+    private Dialog customDialog;
 
 
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_login);
 
         Log.d(TAG, "onCreate: ");
 
+        checkAppUpdate();
         init();
         initLr();
+        initData();
         //getDataFromDb();
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
 
+        tfPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                userController = new UserController();
+                userController.login(new LoginDTO(tfUsername.getText().toString().trim(), tfPassword.getText().toString().trim())).enqueue(new Callback<CMRespDTO<User>>() {
+                    @Override
+                    public void onResponse(Call<CMRespDTO<User>> call, Response<CMRespDTO<User>> response) {
+                        Log.d(TAG, "onResponse: " + response);
+                        if (response.body().getCode() == 1){
+
+                            User user = response.body().getData();
+                            //Log.d(TAG, "onResponse: " + user.getUsername());
+                            //Log.d(TAG, "onResponse: " + response.headers().get("Authorization"));
+                            SessionUser.user = user;
+                            SessionUser.token = response.headers().get("Authorization");
+
+                            Intent intent = new Intent(mContext, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<CMRespDTO<User>> call, Throwable t) {
+                        t.printStackTrace();
+                        MyToast.toast(mContext, "로그인 실패");
+                    }
+                });
+                return false;
+            }
+        });
+
+
+
+
+    }
+
+    private void checkAppUpdate(){
+        AppUpdaterUtils appUpdaterUtils = new AppUpdaterUtils(mContext)
+                .setUpdateFrom(UpdateFrom.GITHUB)
+                .setGitHubUserAndRepo("jungspin", "https://github.com/jungspin/android-medium-clone.git")
+                .withListener(new AppUpdaterUtils.UpdateListener() {
+                    @Override
+                    public void onSuccess(Update update, Boolean isUpdateAvailable) {
+                        Log.d("Latest Version", update.getLatestVersion());
+                        Log.d("Latest Version Code", String.valueOf(update.getLatestVersionCode()));
+                        Log.d("Release notes", update.getReleaseNotes());
+                        Log.d("URL", String.valueOf(update.getUrlToDownload()));
+                        Log.d("Is update available?", Boolean.toString(isUpdateAvailable));
+                    }
+
+                    @Override
+                    public void onFailed(AppUpdaterError error) {
+                        Log.d("AppUpdater Error", "Something went wrong");
+                    }
+                });
+        appUpdaterUtils.start();
     }
 
 
@@ -69,6 +159,8 @@ public class LoginActivity extends AppCompatActivity implements InitSettings {
         tfPassword = findViewById(R.id.tfPassword);
         btnLogin = findViewById(R.id.btnLogin);
         //btnLinkGoogle = findViewById(R.id.btnLinkGoogle);
+        progressBar = findViewById(R.id.progressbar);
+
     }
 
     @Override
@@ -79,24 +171,35 @@ public class LoginActivity extends AppCompatActivity implements InitSettings {
 //        });
         // 일반 로그인
         tvLinkJoin.setOnClickListener(v->{
-            Intent intent = new Intent(mContext, JoinActivity.class);
-            finish();
-            startActivity(intent);
+
+           //showDialog("비회원입니다", "회원가입 하시겠습니까?");
+            Post post = new Post();
+            post.setTitle("게시글 제목 입니다");
+            post.setContent("게시글 내용이에요. 테스트 할거에요");
+            post.setCreated("2022-01-01");
+            post.setUpdated("2022-01-01");
+
+
+            CustomDialog customDialog = new CustomDialog(mContext);
+            customDialog.showAlertDialog(false,"비회원입니다", post.toString(), () -> {
+                Intent intent = new Intent(mContext, JoinActivity.class);
+                startActivity(intent);
+                finish();
+            });
+
+
+
         });
 
         btnLogin.setOnClickListener(v->{
+          /*  progressBar.setVisibility(View.VISIBLE);
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);*/
 
-            String username = tfUsername.getText().toString().trim();
-            String password = tfPassword.getText().toString().trim();
 
-            // 공백있을 시 로그인 불가
-            if (username.equals("") || password.equals("")){
-                MyToast.toast(mContext, "아이디와 비밀번호룰 입력해주세요");
-                return;
-            }
+            //LoadingFragment.showProgressDialog(this);
 
             userController = new UserController();
-            userController.login(new LoginDTO(username, password)).enqueue(new Callback<CMRespDTO<User>>() {
+            userController.login(new LoginDTO(tfUsername.getText().toString().trim(), tfPassword.getText().toString().trim())).enqueue(new Callback<CMRespDTO<User>>() {
                 @Override
                 public void onResponse(Call<CMRespDTO<User>> call, Response<CMRespDTO<User>> response) {
                     Log.d(TAG, "onResponse: " + response);
@@ -107,9 +210,8 @@ public class LoginActivity extends AppCompatActivity implements InitSettings {
                         //Log.d(TAG, "onResponse: " + response.headers().get("Authorization"));
                         SessionUser.user = user;
                         SessionUser.token = response.headers().get("Authorization");
-                        Intent intent = new Intent(mContext, LoadingActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                        //intent.setFlags(Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS);
+
+                        Intent intent = new Intent(mContext, MainActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -124,6 +226,27 @@ public class LoginActivity extends AppCompatActivity implements InitSettings {
         });
 
     }
+
+    private void showDialog(String header, String message){
+        customDialog.show();
+        TextView title = customDialog.findViewById(R.id.mDialog_title);
+        title.setText(header);
+        TextView content = customDialog.findViewById(R.id.mDialog_content);
+        content.setText(message);
+        Button no = customDialog.findViewById(R.id.mDialog_btnNo);
+        no.setOnClickListener(v->{
+            customDialog.dismiss();
+        });
+        Button yes = customDialog.findViewById(R.id.mDialog_btnYes);
+        yes.setOnClickListener(v->{
+            Intent intent = new Intent(mContext, JoinActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+    }
+
+
 
     //============ 구글 로그인을 위한 로직 ==============
     private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
@@ -215,6 +338,9 @@ public class LoginActivity extends AppCompatActivity implements InitSettings {
 
     @Override
     public void initData() {
+       progressBar.setVisibility(View.INVISIBLE);
+       //getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                //WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
     }
 

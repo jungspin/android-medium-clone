@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.cos.mediumclone.R;
+import com.cos.mediumclone.config.LoadingFragment;
 import com.cos.mediumclone.controller.PostController;
 import com.cos.mediumclone.controller.dto.CMRespDTO;
 import com.cos.mediumclone.controller.dto.PostUpdateDTO;
@@ -66,6 +67,7 @@ public class PostUpdateActivity extends AppCompatActivity implements InitSetting
             finish();
         });
         btnUpdate.setOnClickListener(v->{
+            LoadingFragment.showProgressDialog(this);
             int postId = getIntent().getIntExtra("postId", 0);
 
             String title = tfTitle.getText().toString();

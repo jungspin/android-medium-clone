@@ -6,4 +6,7 @@
     <color name="power_light_gray">#F1F0F0</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="pink">#FFACAC</color>
+    <color name="blue">#97D6FF</color>
+    <color name="real_blue">#009AFF</color>
 </resources>

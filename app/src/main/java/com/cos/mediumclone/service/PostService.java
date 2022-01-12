@@ -1,52 +1,24 @@
 package com.cos.mediumclone.service;
 
-import com.cos.mediumclone.config.HeaderInterceptor;
-import com.cos.mediumclone.config.SessionUser;
+import com.airbnb.lottie.L;
 import com.cos.mediumclone.controller.dto.CMRespDTO;
-import com.cos.mediumclone.controller.dto.PostUpdateDTO;
 import com.cos.mediumclone.model.Post;
 
 import java.util.List;
 
-import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Body;
-import retrofit2.http.DELETE;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.http.Path;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.schedulers.Schedulers;
 
-public interface PostService {
+public class PostService {
 
-    @GET("/post")
-    Call<CMRespDTO<List<Post>>> findAll();
-
-    @GET("/post/{id}")
-    Call<CMRespDTO<Post>> findById(@Path("id")int postId);
-
-    @DELETE("/post/{id}")
-    Call<CMRespDTO> deleteById(@Path("id")int postId);
-
-    @PUT("/post/{id}")
-    Call<CMRespDTO<Post>> updateById(@Path("id")int postId, @Body PostUpdateDTO postUpdateDTO);
-
-    @POST("/post")
-    Call<CMRespDTO<Post>> insert(@Body Post post);
-
-    OkHttpClient client = new OkHttpClient.Builder().
-            addInterceptor(new HeaderInterceptor()).build();
-
-
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://172.30.1.25:8080")
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
-            .build();
-
-    PostService service = retrofit.create(PostService.class);
-
+    private PostAPI postAPI;
+    public PostService(RetrofitInstance retrofitInstance){
+        postAPI = retrofitInstance.getInstance.create(PostAPI.class);
+    }
+    public Single<CMRespDTO<List<Post>>> findAll(){
+        return postAPI.findAll().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+    }
 
 }

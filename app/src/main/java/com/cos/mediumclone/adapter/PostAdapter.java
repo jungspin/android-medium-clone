@@ -2,6 +2,7 @@ package com.cos.mediumclone.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.cos.mediumclone.config.LoadingFragment;
 import com.cos.mediumclone.view.activity.PostDetailActivity;
 import com.cos.mediumclone.R;
 import com.cos.mediumclone.model.Post;
@@ -35,7 +37,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder>{
     // 컬렉션 데이터 셋팅 해야함
     public void addItems(List<Post> posts){
         this.posts = posts;
-        notifyDataSetChanged();
     }
 
     // 컬렉션 데이터 셋팅 해야함
@@ -62,11 +63,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder>{
     @Override
     public int getItemCount() {
         return posts.size();
+
     }
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView tvWriter, tvTitle;
+        private TextView tvWriter, tvTitle, tvGender;
         //private ImageView imgUser, imgThumb, icAddBookmark;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -79,6 +82,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder>{
         }
 
         public void setItem(Post post){
+          if (post.getUser().getUsername().equals("ssarssar")){
+              tvGender.getBackground().setTint(Color.parseColor("#97D6FF"));
+              tvGender.setText("여");
+          }
             tvWriter.setText(post.getUser().getUsername());
             tvTitle.setText(post.getTitle());
         }
@@ -86,6 +93,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder>{
         private void init(){
             tvWriter = itemView.findViewById(R.id.tvWriter);
             tvTitle = itemView.findViewById(R.id.tvTitle);
+            tvGender = itemView.findViewById(R.id.tvGender);
+
         }
 
         private void initLr(){

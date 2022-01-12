@@ -22,4 +22,16 @@
     <style name="Theme.MediumClone.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.MediumClone.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="CustomDatePicker" parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="android:background">@drawable/dialog_background</item>
+    </style>
+
+    <style name="CustomTextView" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+
+    </style>
+
+
+
 </resources>

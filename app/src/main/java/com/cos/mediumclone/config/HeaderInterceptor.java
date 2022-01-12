@@ -1,5 +1,6 @@
 package com.cos.mediumclone.config;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import org.jetbrains.annotations.NotNull;
@@ -20,6 +21,8 @@ public class HeaderInterceptor implements Interceptor {
     @Override
     public Response intercept(@NotNull Chain chain) throws IOException {
         Log.d(TAG, "intercept: 실행됨");
+
+
 
         Request request = chain.request().newBuilder()
                 .addHeader("Authorization", SessionUser.token).build();

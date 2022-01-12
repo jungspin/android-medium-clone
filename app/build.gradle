@@ -19,7 +19,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField "String", "BASE_URL", "\"http://192.168.1.107:8080\""
+        }
         release {
+            buildConfigField "String", "BASE_URL", "\"http://192.168.1.107:8080\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -30,6 +34,10 @@ android {
     }
     buildFeatures {
         viewBinding true
+    }
+
+    repositories {
+        maven { url 'https://jitpack.io' }
     }
 }
 
@@ -69,4 +77,14 @@ dependencies {
     implementation 'com.google.firebase:firebase-database'
     // rxjava
     implementation "io.reactivex.rxjava3:rxjava:3.1.0"
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+    implementation "io.reactivex.rxjava2:rxjava:2.2.10"
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+    //implementation "com.squareup.retrtofit2:adapter-rxjava2:2.5.0"
+    // skeleton UI
+    implementation "com.facebook.shimmer:shimmer:0.5.0"
+
+    implementation 'com.github.javiersantos:AppUpdater:2.7'
+
+
 }

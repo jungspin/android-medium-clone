@@ -1,5 +1,6 @@
 package com.cos.mediumclone.service;
 
+import com.cos.mediumclone.BuildConfig;
 import com.cos.mediumclone.config.HeaderInterceptor;
 import com.cos.mediumclone.config.SessionUser;
 import com.cos.mediumclone.controller.dto.CMRespDTO;
@@ -11,6 +12,7 @@ import java.util.List;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -36,7 +38,8 @@ public interface UserService {
             addInterceptor(new HeaderInterceptor()).build();
 
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://172.30.1.25:8080")
+            .baseUrl(BuildConfig.BASE_URL)
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             //.client(client)
             .build();
