@@ -34,16 +34,12 @@ public interface UserService {
 
     // 특정 주소 걸 수 있는지 알아봐. 유저는 토큰 필요 없는 것도 있잖아
     // 첫번째 방법은 갈라치기 해서 쓰는거
-    OkHttpClient client = new OkHttpClient.Builder().
-            addInterceptor(new HeaderInterceptor()).build();
+//    OkHttpClient client = new OkHttpClient.Builder().
+//            addInterceptor(new HeaderInterceptor()).build();
 
     Retrofit retrofit = new Retrofit.Builder()
-<<<<<<< HEAD
+
             .baseUrl(BuildConfig.BASE_URL)
-            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-=======
-            .baseUrl("http://172.30.1.43:8080")
->>>>>>> b04c0a5e031b0b7676e05a40afe65ffcc2103001
             .addConverterFactory(GsonConverterFactory.create())
             //.client(client)
             .build();

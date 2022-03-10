@@ -1,19 +1,25 @@
 package com.cos.mediumclone.service;
 
-import com.airbnb.lottie.L;
+import com.cos.mediumclone.BuildConfig;
+import com.cos.mediumclone.config.HeaderInterceptor;
 import com.cos.mediumclone.controller.dto.CMRespDTO;
+import com.cos.mediumclone.controller.dto.PostUpdateDTO;
 import com.cos.mediumclone.model.Post;
 
 import java.util.List;
 
-import io.reactivex.Single;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Scheduler;
-import io.reactivex.schedulers.Schedulers;
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
-<<<<<<< HEAD
-public class PostService {
-=======
 public interface PostService {
 
     @GET("/post")
@@ -36,20 +42,13 @@ public interface PostService {
 
 
     Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://172.30.1.43:8080")
+            .baseUrl(BuildConfig.BASE_URL)
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build();
 
     PostService service = retrofit.create(PostService.class);
->>>>>>> b04c0a5e031b0b7676e05a40afe65ffcc2103001
 
-    private PostAPI postAPI;
-    public PostService(RetrofitInstance retrofitInstance){
-        postAPI = retrofitInstance.getInstance.create(PostAPI.class);
-    }
-    public Single<CMRespDTO<List<Post>>> findAll(){
-        return postAPI.findAll().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
-    }
 
 }

@@ -3,7 +3,7 @@ package com.cos.mediumclone.controller;
 import com.cos.mediumclone.controller.dto.CMRespDTO;
 import com.cos.mediumclone.controller.dto.PostUpdateDTO;
 import com.cos.mediumclone.model.Post;
-import com.cos.mediumclone.service.PostServiceOriginal;
+import com.cos.mediumclone.service.PostService;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import retrofit2.Call;
 
 public class PostController {
 
-    private PostServiceOriginal postServiceOriginal = PostServiceOriginal.service;
+    private PostService postServiceOriginal = PostService.service;
 
     public Call<CMRespDTO<List<Post>>> findAll(){
         return postServiceOriginal.findAll();

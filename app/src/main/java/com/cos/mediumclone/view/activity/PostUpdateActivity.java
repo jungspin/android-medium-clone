@@ -68,12 +68,9 @@ public class PostUpdateActivity extends AppCompatActivity implements InitSetting
         fabFinish.setOnClickListener(v->{
             finish();
         });
-<<<<<<< HEAD
-        btnUpdate.setOnClickListener(v->{
-            LoadingFragment.showProgressDialog(this);
-=======
+
         fabUpdate.setOnClickListener(v->{
->>>>>>> b04c0a5e031b0b7676e05a40afe65ffcc2103001
+
             int postId = getIntent().getIntExtra("postId", 0);
 
             String title = etTitle.getText().toString();

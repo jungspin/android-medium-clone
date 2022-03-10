@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity implements InitSettings {
 
         Log.d(TAG, "onCreate: ");
 
-        checkAppUpdate();
+        //checkAppUpdate();
         init();
         initLr();
         initData();
@@ -269,11 +269,11 @@ public class LoginActivity extends AppCompatActivity implements InitSettings {
 
             String username[] = user.getEmail().split("@", 0);
 
-            User googleUser = User.builder()
-                    .username(username[0])
-                    .password(hashCode()+"")
-                    .email(user.getEmail())
-                    .build();
+
+            User googleUser = new User();
+            googleUser.setUsername(username[0]);
+            googleUser.setPassword(String.valueOf(hashCode()));
+            googleUser.setEmail(user.getEmail());
 
             // 메인화면 진입을 위함 -> 강제 회원가입, 로그인 (토큰 받아야됨)
             userController = new UserController();

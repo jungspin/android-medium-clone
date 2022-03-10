@@ -2,24 +2,18 @@ package com.cos.mediumclone.view.fragment;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cos.mediumclone.config.LoadingFragment;
 import com.cos.mediumclone.databinding.FragmentHomeBinding;
 import com.cos.mediumclone.model.User;
-import com.cos.mediumclone.service.PostService;
-import com.cos.mediumclone.service.RetrofitInstance;
 import com.cos.mediumclone.util.ResultCode;
 import com.cos.mediumclone.view.activity.MainActivity;
 import com.cos.mediumclone.R;
@@ -35,8 +29,6 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
