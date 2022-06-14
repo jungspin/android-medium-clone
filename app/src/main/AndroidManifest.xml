@@ -30,9 +30,6 @@
         <activity android:name=".view.activity.PostDetailActivity" />
         <activity android:name=".view.activity.MainActivity" />
         <activity
-            android:name=".TestActivity"
-            android:exported="true" />
-        <activity
             android:name=".view.activity.auth.LoginActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true">

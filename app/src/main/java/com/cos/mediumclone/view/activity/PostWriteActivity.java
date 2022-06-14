@@ -78,7 +78,7 @@ public class PostWriteActivity extends AppCompatActivity implements InitSettings
             Log.d(TAG, "initLr: fabSave : " + content);
             Log.d(TAG, "initLr: fabSave : " + content2);
 
-            Post post = Post.builder().title(title).content(content).build();
+            Post post = new Post(title, content);
             postController = new PostController();
             postController.insert(post).enqueue(new Callback<CMRespDTO<Post>>() {
                 @Override

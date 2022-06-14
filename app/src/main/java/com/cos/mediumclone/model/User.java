@@ -1,17 +1,7 @@
 package com.cos.mediumclone.model;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import androidx.annotation.NonNull;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Builder
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class User {
 
     private int id;
@@ -20,6 +10,16 @@ public class User {
     private String email;
     private String created;
     private String updated;
+
+    public User() {
+
+    }
+
+    public User(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
 
     public int getId() {
         return id;
@@ -67,5 +67,18 @@ public class User {
 
     public void setUpdated(String updated) {
         this.updated = updated;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", created='" + created + '\'' +
+                ", updated='" + updated + '\'' +
+                '}';
     }
 }

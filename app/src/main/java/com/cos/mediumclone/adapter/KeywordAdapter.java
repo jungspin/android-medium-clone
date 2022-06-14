@@ -1,5 +1,6 @@
 package com.cos.mediumclone.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,20 +10,21 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.cos.mediumclone.BuildConfig;
 import com.cos.mediumclone.R;
-import com.cos.mediumclone.model.Keyword;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class KeywordAdapter extends RecyclerView.Adapter<KeywordAdapter.MyViewHolder>{
 
-    private List<Keyword> keywords = new ArrayList<>();
+    //private List<Keyword> keywords = new ArrayList<>();
+
+    private List<String> keywords = new ArrayList<>();
 
 
     // 컬렉션 데이터 셋팅 해야함
-    public void addItems(List<Keyword> keywords){
+    @SuppressLint("NotifyDataSetChanged")
+    public void addItems(List<String> keywords){
         this.keywords = keywords;
         notifyDataSetChanged();
     }
@@ -37,9 +39,7 @@ public class KeywordAdapter extends RecyclerView.Adapter<KeywordAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull KeywordAdapter.MyViewHolder holder, int position) {
-        Keyword keyword = keywords.get(position);
-        holder.setItem(keyword);
-
+        holder.setItem(keywords.get(position));
     }
 
     @Override
@@ -49,7 +49,7 @@ public class KeywordAdapter extends RecyclerView.Adapter<KeywordAdapter.MyViewHo
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        private Button btnKeyword;
+        private final Button btnKeyword;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -57,8 +57,8 @@ public class KeywordAdapter extends RecyclerView.Adapter<KeywordAdapter.MyViewHo
             btnKeyword = itemView.findViewById(R.id.btnKeyword);
         }
 
-        public void setItem(Keyword keyword){
-            btnKeyword.setText(keyword.getKeyword());
+        public void setItem(String keyword){
+            btnKeyword.setText(keyword);
         }
     }
 }

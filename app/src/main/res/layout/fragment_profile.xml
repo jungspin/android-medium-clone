@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/white"
+        app:backgroundTint="@color/white"
+        app:fabSize="mini"
         android:src="@drawable/ic_logout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

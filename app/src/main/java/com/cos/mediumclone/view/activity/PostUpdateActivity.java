@@ -75,7 +75,6 @@ public class PostUpdateActivity extends AppCompatActivity implements InitSetting
 
             String title = etTitle.getText().toString();
             String content = mEditor.getHtml();
-            Post post = Post.builder().title(title).content(content).build();
             PostUpdateDTO postUpdateDTO = new PostUpdateDTO(title, content);
 
             postController.updateById(postId, postUpdateDTO).enqueue(new Callback<CMRespDTO<Post>>() {

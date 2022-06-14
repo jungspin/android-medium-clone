@@ -27,19 +27,6 @@
         app:layout_constraintStart_toEndOf="@+id/imgUser"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvGender"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:background="@drawable/refresh_roundedbutton"
-        android:backgroundTint="@color/pink"
-        android:gravity="center"
-        android:text="남"
-        android:layout_marginStart="8dp"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toEndOf="@+id/tvWriter"
-        app:layout_constraintTop_toTopOf="@+id/tvWriter" />
-
     <ImageView
         android:id="@+id/imgThumb"
         android:layout_width="70dp"

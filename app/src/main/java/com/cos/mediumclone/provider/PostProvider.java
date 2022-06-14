@@ -1,11 +1,5 @@
 package com.cos.mediumclone.provider;
 
-import com.cos.mediumclone.model.Keyword;
-import com.cos.mediumclone.model.Post;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class PostProvider {
 
 

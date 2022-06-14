@@ -1,5 +1,6 @@
 package com.cos.mediumclone.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -35,11 +36,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder>{
 
 
     // 컬렉션 데이터 셋팅 해야함
+    @SuppressLint("NotifyDataSetChanged")
     public void addItems(List<Post> posts){
         this.posts = posts;
+        notifyDataSetChanged();
     }
 
     // 컬렉션 데이터 셋팅 해야함
+    @SuppressLint("NotifyDataSetChanged")
     public void addItem(Post post){
         this.posts.add(post);
         notifyDataSetChanged();
@@ -93,7 +97,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder>{
         private void init(){
             tvWriter = itemView.findViewById(R.id.tvWriter);
             tvTitle = itemView.findViewById(R.id.tvTitle);
-            tvGender = itemView.findViewById(R.id.tvGender);
 
         }
 

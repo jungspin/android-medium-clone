@@ -21,9 +21,9 @@ import com.cos.mediumclone.controller.UserController;
 import com.cos.mediumclone.controller.dto.CMRespDTO;
 import com.cos.mediumclone.model.Post;
 import com.cos.mediumclone.model.User;
-import com.cos.mediumclone.provider.KeywordProvider;
 import com.cos.mediumclone.util.InitSettings;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -99,14 +99,11 @@ public class FragmentSearch extends Fragment implements InitSettings {
     @Override
     public void initData() {
 
-        KeywordProvider keywordProvider = new KeywordProvider();
-        keywordAdapter.addItems(keywordProvider.findAll());
-//
-//        PostProvider postProvider = new PostProvider();
-//        postSearchAdapter.addItems(postProvider.findAll());
-//
-//        UserProvider userProvider = new UserProvider();
-//        userAdapter.addItems(userProvider.findAll());
+        List<String> keywords = new ArrayList<>();
+        for(int i=0; i<10;i++){
+            keywords.add("keyword");
+        }
+        keywordAdapter.addItems(keywords);
 
         postController = new PostController();
         postController.findAll().enqueue(new Callback<CMRespDTO<List<Post>>>() {

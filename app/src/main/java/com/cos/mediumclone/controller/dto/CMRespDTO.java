@@ -1,6 +1,5 @@
 package com.cos.mediumclone.controller.dto;
 
-import lombok.Data;
 
 public class CMRespDTO<T> {
     private int code;

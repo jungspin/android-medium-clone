@@ -54,42 +54,6 @@ public class JoinActivity extends AppCompatActivity implements InitSettings {
 
         init();
         initLr();
-        //insertDb();
-        //initSetting();
-        //initData();
-    }
-
-    private void insertDb() {
-        Log.d(TAG, "insertDb: 실행됨");
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        Map<String, Object> user = new HashMap<>();
-        user.put("first", "Ada");
-        user.put("last", "Lovelace");
-        user.put("born", "1815");
-
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener(documentReference -> Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId()))
-                .addOnFailureListener(e -> Log.w(TAG, "Error adding document", e));
-    }
-
-    @Override
-    protected void onResume() {
-        Log.d(TAG, "onResume: ");
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        Log.d(TAG, "onPause: ");
-        super.onPause();
-    }
-
-    @Override
-    protected void onDestroy() {
-        Log.d(TAG, "onDestroy: ");
-        super.onDestroy();
     }
 
     @Override
@@ -122,8 +86,8 @@ public class JoinActivity extends AppCompatActivity implements InitSettings {
                 return;
             }
 
-            User user = User.builder()
-                    .username(username).password(password).email(email).build();
+            User user = new User(username, password, email);
+
 
             userController = new UserController();
             userController.join(user).enqueue(new Callback<CMRespDTO<User>>() {
@@ -133,8 +97,6 @@ public class JoinActivity extends AppCompatActivity implements InitSettings {
                     if (response.code() == 500){ // 이거는 원래 넘어가기 전에 다 막아야됨..중복검사로
                         MyToast.toast(mContext, "다시 시도해주세요");
                     } else if (response.body().getCode() == 1){
-                        //User joinUser = response.body().getData();
-                        //Log.d(TAG, "onResponse: " + joinUser.getUsername());
                         Intent intent = new Intent(mContext, LoginActivity.class);
                         startActivity(intent);
                         finish();

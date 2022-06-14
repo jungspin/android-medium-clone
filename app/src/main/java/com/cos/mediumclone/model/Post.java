@@ -1,12 +1,8 @@
 package com.cos.mediumclone.model;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import androidx.annotation.NonNull;
 
-@Builder
 public class Post {
 
     private int id;
@@ -20,13 +16,9 @@ public class Post {
 
     }
 
-    public Post(int id, String title, String content, User user, String created, String updated) {
-        this.id = id;
+    public Post(String title, String content) {
         this.title = title;
         this.content = content;
-        this.user = user;
-        this.created = created;
-        this.updated = updated;
     }
 
     public int getId() {
@@ -77,6 +69,7 @@ public class Post {
         this.updated = updated;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return
