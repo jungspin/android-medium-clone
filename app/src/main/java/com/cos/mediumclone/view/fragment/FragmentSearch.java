@@ -1,7 +1,9 @@
 package com.cos.mediumclone.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +24,9 @@ import com.cos.mediumclone.controller.dto.CMRespDTO;
 import com.cos.mediumclone.model.Post;
 import com.cos.mediumclone.model.User;
 import com.cos.mediumclone.util.InitSettings;
+import com.cos.mediumclone.view.activity.SearchActivity;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +46,7 @@ public class FragmentSearch extends Fragment implements InitSettings {
     private RecyclerView rvKeywords;
     private RecyclerView.LayoutManager layoutManager;
     private KeywordAdapter keywordAdapter;
+    private TextInputEditText svKeywords;
 
     private RecyclerView rvPosts;
     private PostAdapter postAdapter;
@@ -60,8 +66,11 @@ public class FragmentSearch extends Fragment implements InitSettings {
         rvKeywords = (RecyclerView) view.findViewById(R.id.rvKeywords);
         rvPosts = (RecyclerView) view.findViewById(R.id.rvPosts);
         rvUsers = (RecyclerView) view.findViewById(R.id.tvUsers);
+        svKeywords = view.findViewById(R.id.svKeywords);
+        svKeywords.setFocusable(false);
 
 
+        initLr();
         initAdapter();
         initData();
         return view;
@@ -78,7 +87,11 @@ public class FragmentSearch extends Fragment implements InitSettings {
 
     @Override
     public void initLr() {
-
+        svKeywords.setOnClickListener(v -> {
+            Log.d(TAG, "initLr: click");
+            Intent intent = new Intent(mContext, SearchActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override

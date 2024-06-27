@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ASMSmaliIdeaPluginConfiguration">
     <asm skipDebug="true" skipFrames="true" skipCode="false" expandFrames="false" />
@@ -33,18 +32,26 @@
         <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/layout/keyword_item.xml" value="0.36614583333333334" />
         <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/layout/post_item.xml" value="0.36614583333333334" />
         <entry key="..\:/devtools/androidwork/android-medium-clone/app/src/main/res/layout/post_item_shimmer.xml" value="0.36614583333333334" />
+        <entry key="app/src/main/res/drawable/searchview_rounded.xml" value="0.282" />
+        <entry key="app/src/main/res/layout/activity_error.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/activity_join.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.3359375" />
+        <entry key="app/src/main/res/layout/activity_mvvm_test.xml" value="0.3359375" />
+        <entry key="app/src/main/res/layout/activity_post_detail.xml" value="0.3359375" />
         <entry key="app/src/main/res/layout/activity_post_update.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_post_write.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.3359375" />
         <entry key="app/src/main/res/layout/activity_test.xml" value="0.2" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.3359375" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/post_item.xml" value="0.37604166666666666" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="adopt-11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

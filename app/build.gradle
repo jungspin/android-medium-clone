@@ -5,12 +5,12 @@ plugins {
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "com.cos.mediumclone"
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
 
@@ -84,8 +84,14 @@ dependencies {
     implementation 'com.github.javiersantos:AppUpdater:2.7'
 
 
-
     // richeditor
     implementation 'jp.wasabeef:richeditor-android:2.0.0'
+
+    def lifecycle_version = "2.4.1"
+    // ViewModel
+    //noinspection GradleDependency
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
 }

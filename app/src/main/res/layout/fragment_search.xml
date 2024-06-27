@@ -34,16 +34,25 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <androidx.appcompat.widget.SearchView
+            <com.google.android.material.textfield.TextInputLayout
+
+                android:layout_marginTop="12dp"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/searchview_rounded"
-                android:queryHint="Search Medium"
-                app:iconifiedByDefault="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" >
-            </androidx.appcompat.widget.SearchView>
+                android:layout_height="wrap_content"
+                android:hint="Search Medium"
+                app:startIconDrawable="@drawable/ic_search"
+                app:boxStrokeColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                tools:layout_editor_absoluteX="30dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/svKeywords"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
