@@ -39,6 +39,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -62,11 +63,6 @@ public class LoginActivity extends AppCompatActivity implements InitSettings {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (!Settings.canDrawOverlays(this)) {
-            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
-            startActivity(intent);
-        }
 
         setContentView(R.layout.activity_login);
 
@@ -228,11 +224,6 @@ public class LoginActivity extends AppCompatActivity implements InitSettings {
         progressBar.setVisibility(View.INVISIBLE);
     }
 
-    private void checkPermission() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SYSTEM_ALERT_WINDOW)
-                != PackageManager.PERMISSION_GRANTED) {
 
-        }
-    }
 
 }
