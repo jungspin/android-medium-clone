@@ -1,112 +1,84 @@
 package com.cos.mediumclone.util;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
+import android.view.Window;
+import android.view.WindowManager;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
-import androidx.viewbinding.ViewBinding;
 
-import com.cos.mediumclone.databinding.ItemCustomDialogSingleBinding;
 import com.cos.mediumclone.databinding.ItemCustomDialogTwoBinding;
 
 public class CustomDialog extends DialogFragment {
     private static final String TAG = "CustomDialog";
 
-    private AlertDialog alertDialog;
-    private Context mContext;
-    private @NonNull ItemCustomDialogSingleBinding bindingSingle;
-    private @NonNull ItemCustomDialogTwoBinding bindingTwo;
-    private View view;
-
-
-
-
-    public CustomDialog(Context mContext) {
-        this.mContext = mContext;
+    private static AlertDialog alertDialog;
+    public static CustomDialog getInstance() {
+        CustomDialog fragment = new CustomDialog();
+        Bundle bundle = new Bundle();
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
-    public interface CustomAction{
-        void setPositiveAction();
-    }
+    public void showDialog(Context context, String title, String message, CustomDialogAction customDialogAction) {
+        dismissDialog();
 
+        LayoutInflater inflater = LayoutInflater.from(context);
+        ItemCustomDialogTwoBinding confirmDialogBinding = ItemCustomDialogTwoBinding.inflate(inflater);
 
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        alertDialogBuilder.setView(confirmDialogBinding.getRoot());
+        alertDialogBuilder.setCancelable(false);
 
+        alertDialog = alertDialogBuilder.create();
 
-    public void showAlertDialog(boolean isTwoBtn, String title, String content, CustomAction customAction) {
+        confirmDialogBinding.mDialogTitle.setText(title);
+        confirmDialogBinding.mDialogContent.setText(message);
+        confirmDialogBinding.mDialogBtnYes.setOnClickListener(v -> {
+            customDialogAction.setPositiveAction();
+            dismissDialog();
+        });
+        confirmDialogBinding.mDialogBtnNo.setOnClickListener(v -> {
+            customDialogAction.setNegativeAction();
+            dismissDialog();
+        });
 
-        try {
-            if (alertDialog != null) {
-                alertDialog.dismiss();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-
-        final String TITLE = String.valueOf(title);
-        final String CONTENT = String.valueOf(content);
-
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-
-        if (isTwoBtn) { // single
-            bindingSingle = ItemCustomDialogSingleBinding.inflate(inflater);
-            view = bindingSingle.getRoot();
-
-            bindingSingle.mDialogTitle.setText(TITLE);
-            bindingSingle.mDialogContent.setText(CONTENT);
-            bindingSingle.mDialogSingleBtnConfirm.setOnClickListener(v->{
-                customAction.setPositiveAction();
-            });
-
-        } else {
-            bindingTwo = ItemCustomDialogTwoBinding.inflate(inflater);
-            view = bindingTwo.getRoot();
-
-            // 타이틀 및 내용 표시
-
-            bindingTwo.mDialogTitle.setText(TITLE);
-            bindingTwo.mDialogContent.setText(CONTENT);
-            bindingTwo.mDialogBtnNo.setOnClickListener(v -> {
-                alertDialog.dismiss();
-            });
-            bindingTwo.mDialogBtnYes.setOnClickListener(v -> {
-                customAction.setPositiveAction();
-                alertDialog.dismiss();
-            });
-
-        }
-
-
-        builder.setView(view);
-        builder.setCancelable(false);
-
-
-        alertDialog = builder.create();
-        try {
+        if (alertDialog != null) {
             alertDialog.show();
-            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            Window dialogWindow = alertDialog.getWindow();
+            if (dialogWindow != null) {
+                WindowManager.LayoutParams attribute = alertDialog.getWindow().getAttributes();
+                attribute.width = (int) (context.getResources().getDisplayMetrics().widthPixels * 0.65);
+                attribute.height = (int) (context.getResources().getDisplayMetrics().heightPixels * 0.45);
+
+                alertDialog.getWindow().setAttributes(attribute);
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                ViewGroup.LayoutParams layoutParams = confirmDialogBinding.getRoot().getLayoutParams();
+                layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+
+                confirmDialogBinding.getRoot().setLayoutParams(layoutParams);
+            }
         }
-
-
     }
 
+    public void dismissDialog() {
+        if (alertDialog != null) {
+            alertDialog.dismiss();
+            alertDialog = null;
+        }
+    }
+
+    public interface CustomDialogAction {
+        void setPositiveAction();
+        void setNegativeAction();
+    }
 
 }
